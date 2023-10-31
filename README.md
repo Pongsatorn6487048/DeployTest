@@ -124,7 +124,7 @@
 
   | Characteristic                                | b1  | b2 |
      |----------------------------------------------|----|----|
-     | C1: Theme id is correct            | (1,1)  | (-1,0)  |
+     | C1: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences           | (1,1)  | (-1,0)  |
 
 
 ### Input domain modelling
