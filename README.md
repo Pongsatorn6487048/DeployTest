@@ -265,3 +265,5 @@
      |T1 | 0 | 0 | 30  | True | True | 30  |
      |T2 | 1 | 1 | 50  | False | False | 40  |
      |T3 | 2 | 2 | 50  |  True    |  True     |  40   |
+
+* T2 = Invalid Test เพราะว่าค่า Theme & Difficulty ถูกทั้งคู่ต้องสามารถสร้าง key ได้
