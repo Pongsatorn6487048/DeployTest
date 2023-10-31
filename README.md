@@ -140,6 +140,7 @@
      * C1 = Theme id is correct
      * C2 = Difficulty value is correct
      * C3 = bestTime value is correct
+     * C4 = สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences
 
 * Partition characteristics
 
