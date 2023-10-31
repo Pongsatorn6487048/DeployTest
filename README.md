@@ -185,6 +185,96 @@
 * T2 => Invalid Test เพราะว่าค่า Theme & Difficulty ถูกทั้งคู่ต้องสามารถสร้าง key ได้
 
 
+## T9: 'testGetHighStars()'
+
+### วัตถุประสงค์
+จุดประสงค์ของ test case คือ สร้างขึ้นมาเพื่อตรวจสอบว่า function `getHighStar` คืนค่า HighStars  ถูกต้องตรงกับ expected result
+
+### Interface-Base
+
+* Develop characteristics
+  * C1 = Theme id is correct
+  * C2 = Difficulty value is correct
+
+* Partition characteristics
+
+  | Characteristic                              | b1  | b2 |
+  |--------------------------------------------|----|----|
+  | C1: Theme id is correct     | True  | False  |
+  | C2: Difficulty value is correct | True  | False  |
+
+* Identify (possible) values
+
+  | Characteristic                              | b1  | b2 |
+  |--------------------------------------------|------------------------|---------------------------|
+  | C1: Theme id is correct          | 1  | -1  |
+  | C2: Difficulty value is correct  | 1  | -1  |
+
+### Functionality-Base
+
+* Develop characteristics
+  * C1 = สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences
+
+* Partition characteristics
+
+  | Characteristic                                | b1  | b2 |
+  |----------------------------------------------|----|----|
+  | C1: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences              | True  | False  |
+  
+* Identify (possible) values
+
+  | Characteristic                                | b1  | b2 |
+  |----------------------------------------------|------------------------|---------------------------|
+  | C1: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences               |  (1, 1)  |  (-1, 0)  |
+
+### Input domain modelling
+1. Identify testable functions 
+   * getHighStars()
+2. Identify parameters, return types, return values, and exceptional behavior	
+   * Parameters: theme, difficulty
+   * Return type: int
+   * Return value: ค่าที่ได้จาก SharedPreferences ถ้าหากไม่พบค่าใน SharedPreferences จะคืนค่า-1
+   * Exceptional behavior: ??
+3. Model the input domain
+   * Develop characteristics 
+     * C1 = Theme id is correct
+     * C2 = Difficulty value is correct
+     * C3 = สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences
+   * Partition characteristics
+   
+     | Characteristic                                | b1  | b2 |
+     |----------------------------------------------|----|----|
+     | C1: Theme id is correct                | True  | False  |
+     | C2: Difficulty value is correct         | True  | False  |
+     | C3: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences         | True  | False  |
+
+   * Identify (possible) values
+
+     | Characteristic                                | b1  | b2 |
+     |----------------------------------------------|------------------------|---------------------------|
+     | C1: Theme id is correct              | 1 | -1  |
+     | C2: Difficulty value is correct         | 1  | -1  |
+     | C1: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences               |  (1, 1)  |  (-1, 0)  |
+
+4. Combine partitions into tests
+   * Assumption: choose all combinations (ACoC) 
+   * Test requirements -- number of tests (lower bound) = 2 * 2 * 2 = 8
+   * o	C1:C2:C3 -> (C1B1, C2B1, C3B1) , (C1B1, C1B1, C3B2), (C1B1, C2B2, C3B1), (C1B1, C2B2, C3B2), (C1B2, C2B1, C3B1) , (C1B2, C1B1, C3B2), (C1B2, C2B2, C3B1), (C1B2, C2B2, C3B2)
+5. Derive test values
+   
+     |   Test  | Theme  |  Difficulty | Theme & Difficulty can create keys | Expected result |
+     |----- | :-------------: | :-------------: | :-------------: | :-------------: |
+     |T1 | 1 | 1  | True  | 5  |
+     |T2| 1 | 1  | False  | Invalid  |
+     |T3 | 1 | -1  | True| Invalid  |
+     |T4 | 1 | -1  | False  | -1  |
+     |T5| -1 | 1  | True  | Invalid  |
+     |T6 | -1 | 1  | False  | -1  |
+     |T7 | -1 | -1  | True| Invalid  |
+     |T8 | -1 | -1  | False | -1  |
+   * T2 => Invalid Test เพราะว่าค่า Theme & Difficulty ถูกทั้งคู่ต้องสามารถสร้าง key ได้
+   * T3 & T5 & T7 => Invalid Test เพราะว่าค่า Theme or Difficulty ไม่ถูกต้องไม่สามารถสร้าง key ได้
+
 
 
 ## T10: 'testgetBestTimeForStage()'
