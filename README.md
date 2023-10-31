@@ -157,15 +157,15 @@
   | C1: Theme id is correct     | 1  | -1  |
   | C2: Difficulty value is correct  | 1  | -1  |
   | C3: bestTime value is correct  | 1  | -1  |
-  | C1: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences | (1,1)  | (-1,0)  |
+  | C4: สามารถสร้าง key ที่ได้มาจาก Theme และ Difficulty เพื่อหาค่าใน SharedPreferences | (1,1)  | (-1,0)  |
 
 4. Combine partitions into tests
    * Assumption: choose Each Choice Combinations (ECC) 
    * Test requirements -- number of tests = 2
-   * C1:C2 -> (C1b1, C2b1, C3b1, C4b1) , (C1b2, C2b2, C3b2, C4b2)
+   * C1:C2:C3:C4 -> (C1b1, C2b1, C3b1, C4b1) , (C1b2, C2b2, C3b2, C4b2)
 5. Derive test values
    
    |   Test  | Theme  | Difficulty | BestTime | Theme & Difficulty can create keys |  Expected result |
      |----- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
-     |T1(C1b1, C2b1, C3b1) | 1 | 1  | 125   | True   | BEST : 02:05   |
-     |T2(True, False) | -1 | -1  | -125  | False   | BEST : -  |
+     |T1 | 1 | 1  | 125   | True   | BEST : 02:05   |
+     |T2 | -1 | -1  | -125  | False   | BEST : -  |
