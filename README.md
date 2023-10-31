@@ -170,3 +170,98 @@
      |----- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
      |T1 | 1 | 1  | 125   | True   | BEST : 02:05   |
      |T2 | -1 | -1  | -125  | False   | BEST : -  |
+
+
+
+## T4: 'testSaveTime()'
+
+### วัตถุประสงค์
+จุดประสงค์ของ test case คือ สร้างขึ้นมาเพื่อตรวจสอบว่า passedSecs ที่ได้รับมาเท่ากับ bestTime ที่เก็บไว้อยู่หรือเปล่าถ้า passedSecs น้อยกว่า bestTime ค่า passedSecs จะถูกบันทึกเป็น bestTime อันใหม่
+
+### Interface-Base
+
+* Develop characteristics
+  * C1 = Value of theme
+  * C2 = Value of difficulty
+  * C3 = Value of PassedSecs
+
+* Partition characteristics
+
+  | Characteristic                              | b1  | b2 | b3 |
+  |--------------------------------------------|----|----|----|
+  | C1: Value of theme      | Less than 1  | Equal to 1  | Greater than 1 |
+  | C2: Value of difficulty  | Less than 1  | Equal to 1  | Greater than 1 |
+  | C3: Value of PassedSecs  | Less than bestTime  | Equal to bestTime  | Greater than bestTime |
+
+* Identify (possible) values
+
+  | Characteristic                              | b1  | b2 | b3 |
+  |--------------------------------------------|----|----|----|
+  | C1: Value of theme      | 0  | 1  | 2 |
+  | C2: Value of difficulty  | 0  | 1  | 2 |
+  | C3: Value of PassedSecs  | 30  | 40  | 50 |
+
+### Functionality-Base
+
+* Develop characteristics
+  * C1 = สร้าง key จาก theme และ difficulty ได้
+  * C2 = ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences
+
+* Partition characteristics
+
+  | Characteristic                                | b1  | b2 |
+     |----------------------------------------------|----|----|
+     | C1: สร้าง key จาก theme และ difficulty ได้              | True  | False  |
+     | C2: ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences         | True  | False  |
+  
+* Identify (possible) values
+
+  | Characteristic                                | b1  | b2 |
+     |----------------------------------------------|----|----|
+     | C1: สร้าง key จาก theme และ difficulty ได้              | (1, 2)  | (-1, 0)  |
+     | C2: ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences         | 30  | 50  |
+
+### Input domain modelling
+1. Identify testable functions 
+   * saveTime()
+2. Identify parameters, return types, return values, and exceptional behavior	
+   * Parameters: theme, difficulty, passedSecs
+   * Return type: ไม่มีการคืนค่า (void)
+   * Return value: ไม่มีการคืนค่า (void)
+   * Exceptional behavior: ??
+3. Model the input domain
+   * Develop characteristics 
+     * C1 = สร้าง key จาก theme และ difficulty ได้
+     * C2 = ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences
+
+   * Partition characteristics
+
+      | Characteristic                                | b1  | b2 | b3 |
+     |----------------------------------------------|----|----|----
+     | C1: Value of theme      | Less than 1  | Equal to 1  | Greater than 1 |
+     | C2: Value of difficulty  | Less than 1  | Equal to 1  | Greater than 1 |
+     | C3: Value of PassedSecs  | Less than bestTime  | Equal to bestTime  | Greater than bestTime |
+     | C4: สร้าง key จาก theme และ difficulty ได้  | True  | False  |
+     | C5: ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences  | True  | False  |
+
+   * Identify (possible) values
+
+      | Characteristic                                | b1  | b2 | b3 |
+     |----------------------------------------------|----|----|----|
+     | C1: Value of theme      | 0 | 1  | 2 |
+     | C2: Value of difficulty  | 0  | 1  | 2 |
+     | C3: Value of PassedSecs  | 30  | 40  | 50 |
+     | C4: สร้าง key จาก theme และ difficulty ได้              | (1, 2)  | (-1, 0)  |  |
+     | C5: ค่า PassedSecs ถูกบันทึกใหม่ที่ SharedPreferences         | 30  | 50  |  |
+
+5. Combine partitions into tests
+   * Assumption: choose Each Choice Coverage (ECC) 
+   * Test requirements -- number of tests  = 3
+   * C1:C2 -> (C1B1, C2B1, C3B1, C4B1, C5B1) , (C1B2, C2B2, C3B3, C4B4, C5B5), (C1B3, C2B3, C3B3, C4B3, C5B3)
+6. Derive test values
+   
+   |   Test  | Theme | Difficulty | PassedSecs | Theme & Difficulty can create keys | PassedSecs can Save to Shared Preferences |Expected result |
+     |----- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+     |T1(C1B1, C2B1) | 1 | 2 | 30  | True | True | 30  |
+     |T2(True, False) | 1 | 2 | 50  | False | False | 40  |
+     |T3(False, True) | 1 | 0 | 30  | 30  |
