@@ -257,7 +257,7 @@
 5. Combine partitions into tests
    * Assumption: choose Each Choice Coverage (ECC) 
    * Test requirements -- number of tests  = 3
-   * C1:C2 -> (C1B1, C2B1, C3B1, C4B1, C5B1) , (C1B2, C2B2, C3B2, C4B2, C5B2), (C1B3, C2B3, C3B3)
+   * C1:C2 -> (C1B1, C2B1, C3B1, C4B1, C5B1) , (C1B2, C2B2, C3B2, C4B2, C5B2), (C1B3, C2B3, C3B3, C4B1, C5B1)
 6. Derive test values
    
    |   Test  | Theme | Difficulty | PassedSecs | Theme & Difficulty can create keys | PassedSecs can Save to Shared Preferences |Expected result |
